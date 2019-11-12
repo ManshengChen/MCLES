@@ -27,7 +27,7 @@ F = rand(N,C);
 for it=1:maxIters
     
     %------update W--------
-    W = UpdateP(H,M,W);
+    W = UpdateW(H,M,W);
     
     %------update H--------
     H = SMR_mtv(M,W,S,alpha);
