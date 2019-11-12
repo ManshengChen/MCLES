@@ -1,7 +1,7 @@
-function [D_Mat] = UpdateP(Coef, Data, D_Mat)
+function [D_Mat] = UpdateW(Coef, Data, D_Mat)
 %Coef means H
 %Data means M
-%Input D_Mat means the previous P
+%Input D_Mat means the previous W
 
 Imat= eye(size(Coef,1)); %number of rows of Coef
 
