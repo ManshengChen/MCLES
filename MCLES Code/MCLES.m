@@ -19,18 +19,18 @@ for i=1:V
     SD = SD + D{i};
     M = [M;X{i}]; %X
 end
-P = zeros(SD,d);
+W = zeros(SD,d);
 H = rand(d,N);
 S = zeros(N);
 F = rand(N,C);
 
 for it=1:maxIters
     
-    %------update P--------
-    P = UpdateP(H,M,P);
+    %------update W--------
+    W = UpdateP(H,M,W);
     
     %------update H--------
-    H = SMR_mtv(M,P,S,alpha);
+    H = SMR_mtv(M,W,S,alpha);
     
     %------update S--------
     S = UpdateS(H'*H,F,beta/alpha,gamma/alpha);
@@ -43,7 +43,7 @@ for it=1:maxIters
     [F, temp, ev]=eig1(L, C, 0);
     
     %------print OBJ-------
-    Obj(it) = norm((M-P*H),'fro')^2+alpha*norm((H-H*S),'fro')^2+beta*norm(S,'fro')^2+gamma*trace(F'*L*F);
+    Obj(it) = norm((M-W*H),'fro')^2+alpha*norm((H-H*S),'fro')^2+beta*norm(S,'fro')^2+gamma*trace(F'*L*F);
     if (it>1 && (abs(Obj(it)-Obj(it-1))/Obj(it-1)) < 10^-2)
         break;
     end
